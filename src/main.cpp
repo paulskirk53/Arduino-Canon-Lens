@@ -55,14 +55,28 @@ if (ASCOM.available() > 0) // request from ASCOM Driver
     stop = true;
 
   }
+  
+  if (ReceivedData.indexOf("statrep", 0) > -1) //
+    {
+      if (stepper.distanceToGo() != 0)
+      {
+        ASCOM.print("Moving");
+        ASCOM.println(stepper.currentPosition());
+      }
+    }
 
-
-}
+}  // endif ASCOM available
 
 if (!stop)
-{
-stepper.run();
-}
+  {
+  stepper.run();
+  }
+  else
+  {
+    stepper.moveTo(stepper.currentPosition());    // stop the motor at its current position
+    stepper.run();                                // only steps if there's a need 
+    
+  }
 
 }  // end void loop
 
