@@ -27,6 +27,8 @@ void setup()
   ASCOM.begin(19200);
   pinMode (dirPin, OUTPUT);
   pinMode (stepPin, OUTPUT);
+  stepper.setMaxSpeed(300);               // copied from the dome stepper routine
+  stepper.setAcceleration(140);
   stepper.setCurrentPosition (15000);   // halfway...
   // may need to define a max and min position, or this may be a feature of the driver.
   
