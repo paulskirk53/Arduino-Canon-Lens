@@ -5,7 +5,7 @@
 // Halt - to stop movement
 // the code as always is on github under paulskirk53 projects.
 //
-//
+//todo - remove ascom test prints
 
 #include <Arduino.h>
 #include <AccelStepper.h>
@@ -29,9 +29,8 @@ void setup()
   pinMode (stepPin, OUTPUT);
   stepper.setMaxSpeed(300);               // copied from the dome stepper routine
   stepper.setAcceleration(140);
-  stepper.setCurrentPosition (15000);   // halfway...
-  // may need to define a max and min position, or this may be a feature of the driver.
-  
+  stepper.setCurrentPosition (0);        // this is the accelstepper library default.... 
+    
 }  // end setup
 
 
@@ -39,9 +38,18 @@ void setup()
 void loop() 
 {
 
+
 if (ASCOM.available() > 0) // request from ASCOM Driver
 {
   String ReceivedData = ASCOM.readStringUntil('#');
+
+  if (ReceivedData.indexOf("querymcu", 0) > -1) //
+
+  {
+    ASCOM.print("focuser#");
+  }
+
+
  if (ReceivedData.indexOf("move", 0) > -1) //
     {
       stop = false;
@@ -62,8 +70,12 @@ if (ASCOM.available() > 0) // request from ASCOM Driver
     {
       if (stepper.distanceToGo() != 0)
       {
-        ASCOM.print("Moving");
-        ASCOM.println(stepper.currentPosition());
+        ASCOM.print("Moving#");
+       // ASCOM.println(stepper.currentPosition());
+      }
+      else
+      {
+        ASCOM.print("notmoving#");
       }
     }
 
