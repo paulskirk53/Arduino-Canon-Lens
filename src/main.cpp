@@ -25,6 +25,7 @@ bool stop =false;
 void setup() 
 {
   ASCOM.begin(19200);
+  delay(300);
   pinMode (dirPin, OUTPUT);
   pinMode (stepPin, OUTPUT);
   stepper.setMaxSpeed(300);               // copied from the dome stepper routine
@@ -63,7 +64,10 @@ if (ASCOM.available() > 0) // request from ASCOM Driver
   {
 
     stop = true;
-
+    // todo add code to return the position where the focuser stopped i.e. current position
+    long x = stepper.currentPosition();
+    String y = (String)x;
+    ASCOM.print(y + "#");
   }
   
   if (ReceivedData.indexOf("statrep", 0) > -1) //
@@ -71,11 +75,14 @@ if (ASCOM.available() > 0) // request from ASCOM Driver
       if (stepper.distanceToGo() != 0)
       {
         ASCOM.print("Moving#");
-       // ASCOM.println(stepper.currentPosition());
+        //todo remove line below
+        //ASCOM.println(stepper.currentPosition());
       }
       else
       {
         ASCOM.print("notmoving#");
+        //todo remove line below
+       // ASCOM.println(stepper.currentPosition());
       }
     }
 
