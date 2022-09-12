@@ -28,9 +28,10 @@ void setup()
   delay(300);
   pinMode (dirPin, OUTPUT);
   pinMode (stepPin, OUTPUT);
-  stepper.setMaxSpeed(300);               // copied from the dome stepper routine
-  stepper.setAcceleration(140);
-  stepper.setCurrentPosition (0);        // this is the accelstepper library default.... 
+  stepper.setMaxSpeed(300);               // 300 copied from the dome stepper routine
+  stepper.setAcceleration(140);           // 140 this is the accelstepper library default.... 
+  stepper.setCurrentPosition (5000);      //todo make sure this corresponds with the drivers starting position.
+  // note the ASCOM driver deals in positive focuser position numbers from zero to some maximum, so it's useful to deal in positive numbers in the same range in this code.  
     
 }  // end setup
 
