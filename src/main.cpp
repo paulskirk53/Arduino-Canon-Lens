@@ -45,7 +45,7 @@ if (ASCOM.available() > 0) // request from ASCOM Driver
 {
   String ReceivedData = ASCOM.readStringUntil('#');
 
-  if (ReceivedData.indexOf("querymcu", 0) > -1) //
+  if (ReceivedData.indexOf("focuser", 0) > -1) //
 
   {
     ASCOM.print("focuser#");
