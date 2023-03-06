@@ -3,6 +3,8 @@
 // the commands accepted and processed are:
 // Move - with a parameter which defines the integer focuser position from  1 to 30,000
 // Halt - to stop movement
+// statrep - returns movement state
+// focuser - returns focuser - this identifies the chip to the driver
 // the code as always is on github under paulskirk53 projects.
 //
 //todo - remove ascom test prints
